@@ -7,6 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator _anim;
     private SpriteRenderer _sprite;
 
+
     private void Start()
     {
         _anim = GetComponentInChildren<Animator>();
@@ -24,5 +25,16 @@ public class PlayerAnimation : MonoBehaviour
             _sprite.flipX = true;
         else if (move > 0)
             _sprite.flipX = false;
+    }
+   
+    
+
+    public void Jump()
+    {
+        _anim.SetTrigger("Jump");
+    }
+    public void Swing()
+    {
+        _anim.SetTrigger("Swing");
     }
 }
