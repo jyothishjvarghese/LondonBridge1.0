@@ -1,0 +1,2 @@
+C:\Users\Varghese\Documents\GitHub\LondonBridge1.0\LondonBridgeDefender\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\Varghese\Documents\GitHub\LondonBridge1.0\LondonBridgeDefender\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
