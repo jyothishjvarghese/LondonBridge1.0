@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, IDamageable {
 
     protected Player playerUnit;
     
     protected SpriteRenderer sprite;
     protected Animator anim;
     protected Rigidbody2D rigid;
-   
+    public int Health { get; set; }
+    
+    protected int health = 2;
 
+    private bool _canDamage;
     private bool _switch;
     [SerializeField]
     private float speed;
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour {
         sprite = GetComponentInChildren<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         playerUnit = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        Health = health;
 
     }
 	void Start ()
@@ -40,6 +44,16 @@ public class Enemy : MonoBehaviour {
         }
         
 	}
+
+    public void Damage()
+    {
+        health--;
+                
+        if(health < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     public void Movement()
     {
@@ -71,5 +85,25 @@ public class Enemy : MonoBehaviour {
             sprite.flipX = true;
             
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        IDamageable hit = other.GetComponent<IDamageable>();
+
+        if (other.tag == "Player")
+        {
+            if (_canDamage == true)
+            {
+                hit.Damage();
+                _canDamage = false;
+                StartCoroutine(ResetDamage());
+            }
+        }
+    }
+    IEnumerator ResetDamage()
+    {
+        yield return new WaitForSeconds(1.0f);
+        _canDamage = true;
     }
 }

@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 61787489656906242}
   m_Layer: 12
   m_Name: Enemy_Skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355698421725186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.9970856, y: 8.153252, z: -0.13085938}
+  m_LocalPosition: {x: -2.5793812, y: 9.515083, z: -0.13085938}
   m_LocalScale: {x: 1.5239, y: 1.5239, z: 1.5239}
   m_Children: []
   m_Father: {fileID: 0}

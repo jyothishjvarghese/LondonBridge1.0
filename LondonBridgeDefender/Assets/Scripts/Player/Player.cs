@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField]
     protected int speed;
@@ -16,11 +16,15 @@ public class Player : MonoBehaviour
 
     private bool isGrounded;
     private bool resetJumpNeeded;
+    public int Health { get; set; }
+    [SerializeField]
+    protected int health;
 
     public void Start()
     {
         _rigid = GetComponent<Rigidbody2D>();
         _anim = GetComponent<PlayerAnimation>();
+        Health = health;
     }
 
     public void Update()
@@ -69,5 +73,16 @@ public class Player : MonoBehaviour
        
     }
 
+    public void Damage()
+    {
+        health--;
+        if(health < 1)
+        {
+            _anim.Death();
+            Destroy(this.gameObject);
+            
+        }
+        
+    }
    
 }

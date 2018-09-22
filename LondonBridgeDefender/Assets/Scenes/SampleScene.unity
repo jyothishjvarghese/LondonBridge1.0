@@ -390,6 +390,7 @@ MonoBehaviour:
   jumpForce: 6
   fireSwingPrefab: {fileID: 1229264341653634, guid: f0530be0f1ed76d46b2df3269d064882,
     type: 2}
+  health: 5
 --- !u!4 &289025145
 Transform:
   m_ObjectHideFlags: 0
@@ -397,7 +398,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 289025141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.79, y: 2.2, z: -0.072265625}
+  m_LocalPosition: {x: -6.154, y: 2.161, z: -0.072265625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1963639420}
@@ -1004,7 +1005,7 @@ GameObject:
   - component: {fileID: 1963639423}
   m_Layer: 11
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

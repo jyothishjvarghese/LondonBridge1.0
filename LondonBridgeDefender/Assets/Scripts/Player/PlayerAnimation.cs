@@ -37,4 +37,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         _anim.SetTrigger("Swing");
     }
+
+    public void Death()
+    {
+        _anim.SetBool("Death", true);
+    }
 }

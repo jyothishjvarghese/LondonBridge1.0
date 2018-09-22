@@ -8,6 +8,7 @@ public class Fire_effect : MonoBehaviour
     private float speed = 10.0f;
     private float transition;
     private bool resetTurn;
+    private bool _canDamage = true;
 
     private void Start()
     {
@@ -51,11 +52,23 @@ public class Fire_effect : MonoBehaviour
        
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if(other.tag == "Enemy")
-    //    {
-            
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        IDamageable hit = other.GetComponent<IDamageable>();
+
+        if (other.tag == "Enemy")
+        {
+            if (_canDamage == true)
+            {
+                hit.Damage();
+                _canDamage = false;
+                StartCoroutine(ResetDamage());
+            }
+        }
+    }
+    IEnumerator ResetDamage()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _canDamage = true;
+    }
 }
