@@ -9,16 +9,20 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     protected int jumpForce;
 
+    public int score;
     public GameObject fireSwingPrefab;
 
     private Rigidbody2D _rigid;
     private PlayerAnimation _anim;
 
+    private bool isDead;
     private bool isGrounded;
+    private bool _canDamage = true;
     private bool resetJumpNeeded;
     public int Health { get; set; }
     [SerializeField]
     protected int health;
+    
 
     public void Start()
     {
@@ -29,12 +33,45 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Update()
     {
-        Movement();
+        if (isDead == false)
+        {
+            Movement();
+        }
         if (Input.GetKeyDown(KeyCode.L) && isGrounded == true)
         {
             _anim.Swing();
             Instantiate(fireSwingPrefab, transform.position, Quaternion.identity);
-}
+        }
+    }
+    public void Damage() { }
+    void OnCollisionEnter2D (Collision2D col)
+    {
+        if(col.gameObject.tag == "Enemy")
+        {
+            if(health > 1f)
+            {
+                if (_canDamage == true)
+                {
+                    TakeDamage(col.transform);
+                    _canDamage = false;
+                    StartCoroutine(ResetDamage());
+                }
+                
+            }
+            else
+            {
+                _anim.Death();
+                isDead = true;
+                StartCoroutine(DestroyObject());
+            }
+        }
+
+    }
+
+    void TakeDamage(Transform enemy)
+    {
+        health--;
+        UIManager.Instance.UpdateLives(health);
     }
     public void Movement()
     {
@@ -72,17 +109,19 @@ public class Player : MonoBehaviour, IDamageable
         resetJumpNeeded = false;
        
     }
-
-    public void Damage()
+    IEnumerator ResetDamage()
     {
-        health--;
-        if(health < 1)
-        {
-            _anim.Death();
-            Destroy(this.gameObject);
-            
-        }
-        
+        yield return new WaitForSeconds(0.5f);
+        _canDamage = true;
     }
-   
+    IEnumerator DestroyObject()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(this.gameObject);
+    }
+    public void AddScore()
+    {
+        UIManager.Instance.UpdateScore();
+    }
+
 }

@@ -40,6 +40,6 @@ public class PlayerAnimation : MonoBehaviour
 
     public void Death()
     {
-        _anim.SetBool("Death", true);
+        _anim.SetTrigger("Death");
     }
 }

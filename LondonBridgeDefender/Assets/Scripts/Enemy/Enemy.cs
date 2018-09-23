@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     
     protected int health = 2;
 
-    private bool _canDamage;
+    private bool _canDamage = true;
     private bool _switch;
     [SerializeField]
     private float speed;
@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     {
         IDamageable hit = other.GetComponent<IDamageable>();
 
-        if (other.tag == "Player")
+        if (hit != null)
         {
             if (_canDamage == true)
             {
